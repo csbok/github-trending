@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h5 style="text-align: center;">This page's data is crawled from <a href="https://github.com/trending/" target="_blank">github.com/trending</a></h5>
+
+{% for object in object_list %}
+<div class="mdl-grid">
+   <div class="mdl-layout-spacer"></div>
+
+    <div class=" mdl-cell--8-col mdl-card mdl-shadow--2dp" style="min-height:0">
+  <div class="mdl-card__title">
+    <span class="mdl-chip mdl-color--blue">
+        <span class="mdl-chip__text mdl-color-text--white">{{ object.rank }}</span>
+    </span>
+    <a href="{% url 'oneitem-list' object.id %}" style="margin-left:10px;">
+        <h2 class="mdl-card__title-text">{{ object.url}}</h2>
+    </a>
+  </div>
+  <div class="mdl-card__supporting-text">
+      {{ object.desc}}
+  </div>
+  <div class="mdl-card__actions mdl-card--border">
+      {% if object.language %}
+<span class="mdl-chip mdl-chip--contact">
+    <span class="mdl-chip__contact mdl-color-text--white mdl-color--amber"></span>
+    <span class="mdl-chip__text">{{ object.language }}</span>
+</span>
+      {% endif %}
+<span class="mdl-chip mdl-chip--contact">
+    <span class="mdl-chip__contact mdl-color--teal mdl-color-text--white"><i class="fa fa-star" aria-hidden="true"></i></span>
+    <span class="mdl-chip__text">{{ object.star_count }}</span>
+</span>
+<span class="mdl-chip mdl-chip--contact">
+    <span class="mdl-chip__contact mdl-color--teal mdl-color-text--white"><i class="fa fa-code-fork" aria-hidden="true"></i></span>
+    <span class="mdl-chip__text">{{ object.fork_count }}</span>
+</span>
+
+<span class="mdl-chip mdl-chip--contact" style="float:right">
+    <span class="mdl-chip__contact mdl-color--teal mdl-color-text--white"><i class="fa fa-star" aria-hidden="true"></i></span>
+    <span class="mdl-chip__text">{{ object.today_star_count }} stars today </span>
+</span>
+
+
+  </div>
+  <div class="mdl-card__menu">
+      <a href="https://www.github.com{{ object.url }}" target="_blank">
+    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+        <i class="fa fa-github" aria-hidden="true"></i>
+    </button>
+          </a>
+  </div>
+</div>
+   <div class="mdl-layout-spacer"></div>
+</div>
+{% endfor %}
+{% endblock %}
