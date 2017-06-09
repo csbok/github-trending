@@ -3,6 +3,18 @@
 {% block content %}
     <h5 style="text-align: center;">This page's data is crawled from <a href="https://github.com/trending/" target="_blank">github.com/trending</a></h5>
 
+    <div style="text-align:center">
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}"><i class="fa fa-angle-double-left" aria-hidden="true"></i></a>
+      {% endif %}
+
+        crawled at {{ object_list.first.created_at }}
+
+      {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}"><i class="fa fa-angle-double-right" aria-hidden="true"></i></a>
+      {% endif %}
+    </div>
+
 {% for object in object_list %}
 <div class="mdl-grid">
    <div class="mdl-layout-spacer"></div>

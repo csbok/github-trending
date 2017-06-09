@@ -11,6 +11,7 @@ from trend.models import TodayTrend
 
 class TodayTrendListView(ListView):
     model = TodayTrend
+    paginate_by = 25
 
 
 class OneItemListView(ListView):
