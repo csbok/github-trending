@@ -24,8 +24,21 @@
     <span class="mdl-chip mdl-color--blue">
         <span class="mdl-chip__text mdl-color-text--white">{{ object.rank }}</span>
     </span>
+
+    <span style="margin-left:10px">
+      {% if object.diff is None %}
+          <i class="fa fa-backward fa-rotate-90" style="color:red"></i>
+      {% elif object.diff == 0 %}
+          <i class="fa fa-minus" aria-hidden="true" style="color:gray"></i>
+      {% elif object.diff > 0 %}
+          <i class="fa fa-play fa-rotate-90" style="color:blue"></i> {{ object.diff }}
+      {% elif object.diff < 0 %}
+          <i class="fa fa-play fa-rotate-270" style="color:orangered"></i> {{ object.diff }}
+      {% endif %}
+    </span>
+
     <a href="{% url 'oneitem-list' object.id %}" style="margin-left:10px;">
-        <h2 class="mdl-card__title-text">{{ object.url}}</h2>
+        <h2 class="mdl-card__title-text">{{ object.url|truncatechars:50 }}</h2>
     </a>
   </div>
   <div class="mdl-card__supporting-text">

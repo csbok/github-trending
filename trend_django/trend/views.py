@@ -14,6 +14,21 @@ class TodayTrendListView(ListView):
     paginate_by = 25
 
 
+    def get_context_data(self, **kwargs):
+        context = super(TodayTrendListView, self).get_context_data(**kwargs)
+        start_idx = context['page_obj'].end_index()
+        end_idx = start_idx + self.paginate_by
+        yesterday_trend = TodayTrend.objects.all()[start_idx:end_idx]
+
+        for object in context['object_list']:
+            for yesterday in yesterday_trend:
+                if object.url == yesterday.url:
+                    object.diff = object.rank - yesterday.rank
+                    break
+
+        return context
+
+
 class OneItemListView(ListView):
     template_name = 'trend/oneitem_list.html'
     model = TodayTrend
