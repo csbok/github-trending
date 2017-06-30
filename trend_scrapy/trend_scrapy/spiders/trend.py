@@ -25,7 +25,7 @@ class TrendSpider(BaseSpider):
                     desc = str.strip()
                     break
 
-            language = li.xpath('div/span[@itemprop="programmingLanguage"]/text()').extract()
+            language = li.xpath('div/span/span[@itemprop="programmingLanguage"]/text()').extract()
             if language:
                 language = language[0].strip()
             else:
