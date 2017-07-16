@@ -32,7 +32,7 @@ class TrendSpider(BaseSpider):
                 language = ''
             star_count = int(li.xpath('div/a[1]/text()').extract()[3].replace(',', ''))
             fork_count = int(li.xpath('div/a[2]/text()').extract()[1].replace(',', ''))
-            today_star_count = int(li.xpath('div/span[@class="float-right"]/text()').extract()[1].replace(',', '').replace('stars today', ''))
+            today_star_count = int(li.xpath('div/span[last()]/text()').extract()[1].replace(',', '').replace('stars today', ''))
             print(url)
             print(desc) # desc
             print(language) # language
